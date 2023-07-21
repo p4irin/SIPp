@@ -4,14 +4,15 @@ Spin up a container and use SIPp interactively from a bash session inside the co
 
 ## Tags and versions
 
-- Tag _latest_: SIPp v3.6.1 on Ubuntu 22.04 LTS jammy
+- Tag _latest_: SIPp v3.7.1 on Ubuntu 22.04 LTS jammy
+- Tag _v3.7.1_: SIPp v3.7.1 on Ubuntu 22.04 LTS jammy
 - Tag _v3.6.1_: SIPp v3.6.1 on Ubuntu 22.04 LTS jammy
 
 ## References for more information on and usage of SIPp
 
 - [Sourceforge](https://sipp.sourceforge.net/index.html)
 - [Github](https://github.com/SIPp/sipp)
-- [readthedocs.io](https://sipp.readthedocs.io/en/v3.6.1/)
+- [readthedocs.io](https://sipp.readthedocs.io)
 
 ## Examples of usage
 
@@ -25,7 +26,7 @@ $ docker pull p4irin/sipp
 Drop yourself in a bash shell inside the container
 
 ```bash
-$ docker run --rm --network host -i -t p4irin/sipp:v3.6.1 bash
+$ docker run --rm --network host -i -t p4irin/sipp:latest bash
 root@host:/#
 ```
 
@@ -62,7 +63,7 @@ root@host:/# sipp -sn uas
 Mount a `project-directory` in the current directory on the Docker host to a directory in the container for test and development of your own XML scenarios.
 
 ```bash
-$ docker run --rm --network host -i -t -v $(pwd)/project-directory:/some-container-dir p4irin/sipp:v3.6.1 bash
+$ docker run --rm --network host -i -t -v $(pwd)/project-directory:/some-container-dir p4irin/sipp:latest bash
 root@host:/#
 ```
 

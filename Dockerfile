@@ -3,19 +3,19 @@ RUN apt-get update && apt-get install -y build-essential cmake apt-utils \
 libssl-dev libpcap-dev libsctp-dev libncurses5-dev && \
 apt-get autoremove -y && apt-get clean -y
 
-ADD https://github.com/SIPp/sipp/releases/download/v3.6.1/sipp-3.6.1.tar.gz /
-RUN tar -xzf /sipp-3.6.1.tar.gz
+ADD https://github.com/SIPp/sipp/releases/download/v3.7.1/sipp-3.7.1.tar.gz /
+RUN tar -xzf /sipp-3.7.1.tar.gz
 
-WORKDIR /sipp-3.6.1
+WORKDIR /sipp-3.7.1
 RUN cmake . -DUSE_PCAP=1 -DUSE_GSL=1 -DUSE_SSL=1 -DUSE_SCTP=1
 RUN make install
 
 WORKDIR /
-RUN rm -rf sipp-3.6.1*
+RUN rm -rf sipp-3.7.1*
 
 FROM ubuntu:22.04
 LABEL description="SIPp - a SIP protocol test tool"
-LABEL version="3.6.1"
+LABEL version="3.7.1"
 LABEL base-image="ubuntu:22.04"
 LABEL payload-github-url="https://github.com/SIPp/sipp"
 LABEL github-url="https://github.com/p4irin/sipp"

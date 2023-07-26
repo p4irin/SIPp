@@ -15,10 +15,10 @@ RUN rm -rf sipp-3.7.1*
 
 FROM ubuntu:22.04
 LABEL description="SIPp - a SIP protocol test tool"
-LABEL version="3.7.1"
-LABEL base-image="ubuntu:22.04"
-LABEL payload-github-url="https://github.com/SIPp/sipp"
-LABEL github-url="https://github.com/p4irin/sipp"
+LABEL sipp-version="3.7.1"
+LABEL sipp-base-image="ubuntu:22.04"
+LABEL sipp-github-url="https://github.com/SIPp/sipp"
+LABEL sipp-github-url="https://github.com/p4irin/sipp"
 LABEL maintainer="https://github.com/p4irin"
 LABEL author = "https://github.com/p4irin"
 ENV DEBIAN_FRONTEND noninteractive

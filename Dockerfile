@@ -1,22 +1,28 @@
-FROM ubuntu:22.04 as builder
+ARG ubuntu_version
+ARG sipp_version
+
+FROM ubuntu:${ubuntu_version} as builder
+
+ARG sipp_version
+
 RUN apt-get update && apt-get install -y build-essential cmake apt-utils \
 libssl-dev libpcap-dev libsctp-dev libncurses5-dev && \
 apt-get autoremove -y && apt-get clean -y
 
-ADD https://github.com/SIPp/sipp/releases/download/v3.7.1/sipp-3.7.1.tar.gz /
-RUN tar -xzf /sipp-3.7.1.tar.gz
+ADD https://github.com/SIPp/sipp/releases/download/v${sipp_version}/sipp-${sipp_version}.tar.gz /
+RUN tar -xzf /sipp-${sipp_version}.tar.gz
 
-WORKDIR /sipp-3.7.1
+WORKDIR /sipp-${sipp_version}
 RUN cmake . -DUSE_PCAP=1 -DUSE_GSL=1 -DUSE_SSL=1 -DUSE_SCTP=1
 RUN make install
 
 WORKDIR /
-RUN rm -rf sipp-3.7.1*
+RUN rm -rf sipp-${sipp_version}*
 
-FROM ubuntu:22.04
+FROM ubuntu:${ubuntu_version}
+ARG sipp_version
 LABEL description="SIPp - a SIP protocol test tool"
-LABEL sipp-version="3.7.1"
-LABEL sipp-base-image="ubuntu:22.04"
+LABEL sipp-version="${sipp_version}"
 LABEL sipp-github-url="https://github.com/SIPp/sipp"
 LABEL sipp-github-url="https://github.com/p4irin/sipp"
 LABEL maintainer="https://github.com/p4irin"

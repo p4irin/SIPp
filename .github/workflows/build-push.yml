@@ -1,0 +1,46 @@
+name: Build SIPp on Ubuntu image and push the image to DockerHub
+
+on:
+  workflow_dispatch:
+    inputs:
+      sipp_version:
+        description: 'Version of SIPp'
+        default: latest
+        required: true
+        type: string
+      ubuntu_version:
+        description: 'Version of Ubuntu'
+        default: latest
+        required: true
+        type: string
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get the SIPp version if user used the default (latest)
+      if: ${{ inputs.sipp_version == 'latest' }}
+      run: |
+        SIPP_VERSION=$(curl -s https://api.github.com/repos/SIPp/sipp/releases/latest | grep -o '"tag_name": ".*"' | cut -d'"' -f4 | sed 's/^v//')
+        echo "SIPP_VERSION=${SIPP_VERSION}" >> $GITHUB_ENV
+    - name: Use the SIPp version specified by the user
+      if: ${{ inputs.sipp_version != 'latest' }}
+      run: echo "SIPP_VERSION=${{ inputs.sipp_version }}" >> $GITHUB_ENV
+    - name: Login to DockerHub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    - name: Display the program version to build
+      run: echo "We're going to build version ${SIPP_VERSION}"
+    - name: Push image to DockerHub
+      uses: docker/build-push-action@v4.0.0
+      with:
+        build-args: |
+          sipp_version: ${SIPP_VERSION}
+          ubuntu_version: ${{ inputs.ubuntu_version}}
+        context: ./
+        push: true
+        tags: |
+          ${{ secrets.DOCKERHUB_USERNAME }}/sipp:v${SIPP_VERSION}_on_ubuntu-${{ inputs.ubuntu_version }}
+          ${{ secrets.DOCKERHUB_USERNAME }}/sipp:latest_on_ubuntu-${{ inputs.ubuntu_version }}          

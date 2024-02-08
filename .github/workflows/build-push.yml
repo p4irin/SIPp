@@ -10,7 +10,6 @@ on:
         type: string
       ubuntu_version:
         description: 'Version of Ubuntu'
-        default: latest
         required: true
         type: string
 

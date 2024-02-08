@@ -43,4 +43,4 @@ jobs:
         push: true
         tags: |
           ${{ secrets.DOCKERHUB_USERNAME }}/sipp:v${{ env.SIPP_VERSION }}_on_ubuntu-${{ inputs.ubuntu_version }}
-          ${{ secrets.DOCKERHUB_USERNAME }}/sipp:latest_on_ubuntu-${{ inputs.ubuntu_version }}          
+          

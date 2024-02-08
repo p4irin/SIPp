@@ -36,6 +36,9 @@ jobs:
     - name: Push image to DockerHub
       uses: docker/build-push-action@v4.0.0
       with:
+        build-args: |
+          sipp_version: ${SIPP_VERSION}
+          ubuntu_version: ${{ inputs.ubuntu_version}}
         context: ./
         push: true
         tags: |

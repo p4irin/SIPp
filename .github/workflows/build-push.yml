@@ -39,7 +39,7 @@ jobs:
         build-args: |
           sipp_version: ${{ env.SIPP_VERSION }}
           ubuntu_version: ${{ inputs.ubuntu_version}}
-        context: ./
+        context: .
         push: true
         tags: |
           ${{ secrets.DOCKERHUB_USERNAME }}/sipp:v${{ env.SIPP_VERSION }}_on_ubuntu-${{ inputs.ubuntu_version }}

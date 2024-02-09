@@ -6,9 +6,7 @@ Spin up a container and use SIPp interactively from a bash session inside the co
 
 ## Tags and versions
 
-- Tag _latest_: SIPp v3.7.1 on Ubuntu 22.04 LTS jammy
-- Tag _v3.7.1_: SIPp v3.7.1 on Ubuntu 22.04 LTS jammy
-- Tag _v3.6.1_: SIPp v3.6.1 on Ubuntu 22.04 LTS jammy
+[Tags on SIPp and Ubuntu versions](https://hub.docker.com/r/p4irin/sipp/tags)
 
 ## References for more information on and usage of SIPp
 

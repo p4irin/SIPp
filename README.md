@@ -1,5 +1,7 @@
 # SIPp on Ubuntu Docker image
 
+[![Build SIPp on Ubuntu image and push the image to DockerHub](https://github.com/p4irin/sipp/actions/workflows/build-push.yml/badge.svg)](https://github.com/p4irin/sipp/actions/workflows/build-push.yml)
+
 Spin up a container and use SIPp interactively from a bash session inside the container. Volume mount a directory on the Docker host's filesystem into the container to develop your own XML scenarios and run/test them inside the container. Copy your developed XML scenarios to a new built image. Distribute your set of XML scenarios and run them on any Docker host.
 
 ## Tags and versions

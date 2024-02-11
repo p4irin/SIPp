@@ -12,6 +12,10 @@ on:
         description: 'Version of Ubuntu'
         required: true
         type: string
+      tag_as_latest:
+        description: 'Tag as latest'
+        required: true
+        type: boolean
 
 jobs:
   build-and-push:
@@ -42,4 +46,16 @@ jobs:
         push: true
         tags: |
           ${{ secrets.DOCKERHUB_USERNAME }}/sipp:v${{ env.SIPP_VERSION }}_on_ubuntu-${{ inputs.ubuntu_version }}
-
+    - name: Tag as latest and push
+      if: ${{ inputs.tag_as_latest }}
+      uses: docker/build-push-action@v4.0.0
+      with:
+        build-args: |
+          ubuntu_version=${{ inputs.ubuntu_version }}
+          sipp_version=${{ env.SIPP_VERSION }}
+        context: .
+        push: true
+        tags: |
+          ${{ secrets.DOCKERHUB_USERNAME }}/sipp:latest
+        
+      

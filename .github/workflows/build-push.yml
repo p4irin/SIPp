@@ -36,7 +36,7 @@ jobs:
       run: |
         echo "# Build and push SIPp on Ubuntu image to DockerHub" >> $GITHUB_STEP_SUMMARY
         echo "## Ubuntu version" >> $GITHUB_STEP_SUMMARY
-        echo "We're building from a Ubuntu version ${{ inputs.ubuntu_version }} image' >> $GITHUB_STEP_SUMMARY
+        echo "We're building from a Ubuntu version ${{ inputs.ubuntu_version }} image" >> $GITHUB_STEP_SUMMARY
         echo "## SIPp version" >> $GITHUB_STEP_SUMMARY
         echo "We're going to build SIPp version ${SIPP_VERSION}" >> $GITHUB_STEP_SUMMARY
     - name: Login to DockerHub

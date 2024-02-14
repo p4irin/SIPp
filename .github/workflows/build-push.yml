@@ -55,7 +55,9 @@ jobs:
         tags: |
           ${{ secrets.DOCKERHUB_USERNAME }}/sipp:v${{ env.SIPP_VERSION }}_on_ubuntu-${{ inputs.ubuntu_version }}
     - name: Display tag in job summary
-      run: echo "Built and pushed ${{ secrets.DOCKERHUB_USERNAME }}/sipp:v${{ env.SIPP_VERSION }}_on_ubuntu-${{ inputs.ubuntu_version }}" >> $GITHUB_STEP_SUMMARY
+      run: |
+        echo "## Built tagged and pushed" >> $GITHUB_STEP_SUMMARY
+        echo "Built and pushed ${{ secrets.DOCKERHUB_USERNAME }}/sipp:v${{ env.SIPP_VERSION }}_on_ubuntu-${{ inputs.ubuntu_version }}" >> $GITHUB_STEP_SUMMARY
     - name: Tag as latest and push
       if: ${{ inputs.tag_as_latest == true }}
       uses: docker/build-push-action@v5

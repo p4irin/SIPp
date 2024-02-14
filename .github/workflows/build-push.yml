@@ -32,6 +32,13 @@ jobs:
     - name: Use the SIPp version specified by the user
       if: ${{ inputs.sipp_version != 'latest' }}
       run: echo "SIPP_VERSION=${{ inputs.sipp_version }}" >> $GITHUB_ENV
+    - name: Display Ubuntu and SIPp versions used in the build in job summary
+      run: |
+        echo "# Build and push SIPp on Ubuntu image to DockerHub" >> $GITHUB_STEP_SUMMARY
+        echo "## Ubuntu version" >> $GITHUB_STEP_SUMMARY
+        echo "We're building from a Ubuntu version ${{ inputs.ubuntu_version }} image' >> $GITHUB_STEP_SUMMARY
+        echo "## SIPp version" >> $GITHUB_STEP_SUMMARY
+        echo "We're going to build SIPp version ${SIPP_VERSION}" >> $GITHUB_STEP_SUMMARY
     - name: Login to DockerHub
       uses: docker/login-action@v3
       with:
@@ -47,6 +54,8 @@ jobs:
         push: true
         tags: |
           ${{ secrets.DOCKERHUB_USERNAME }}/sipp:v${{ env.SIPP_VERSION }}_on_ubuntu-${{ inputs.ubuntu_version }}
+    - name: Display tag in job summary
+      run: echo "Built and pushed ${{ secrets.DOCKERHUB_USERNAME }}/sipp:v${{ env.SIPP_VERSION }}_on_ubuntu-${{ inputs.ubuntu_version }}" >> $GITHUB_STEP_SUMMARY
     - name: Tag as latest and push
       if: ${{ inputs.tag_as_latest == true }}
       uses: docker/build-push-action@v5
@@ -58,5 +67,8 @@ jobs:
         push: true
         tags: |
           ${{ secrets.DOCKERHUB_USERNAME }}/sipp:latest
+    - name: Display tag in job summary
+      if: ${{ inputs.tag_as_latest == true }}
+      run: echo "Tagged and pushed ${{ secrets.DOCKERHUB_USERNAME }}/sipp:latest" >> $GITHUB_STEP_SUMMARY
         
       

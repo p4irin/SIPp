@@ -1,5 +1,4 @@
-name: Build SIPp on Ubuntu image and push the image to DockerHub
-
+name: SIPp Docker image
 on:
   workflow_dispatch:
     inputs:
